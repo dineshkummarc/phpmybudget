@@ -1,5 +1,9 @@
 <?php
 
+namespace Application\Scripts;
+
+use Core\ConnexionPDO;
+
 class TokenCommun {
     
     public static function suppToken(){

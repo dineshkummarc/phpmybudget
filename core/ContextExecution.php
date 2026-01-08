@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class ContextExecution {
 	
 	public $m_objet;
@@ -71,7 +73,7 @@ class ContextExecution {
 	}
 
 	/**
-	 * Acc�s au titre de la page
+	 * Accès au titre de la page
 	 */
 	public function getTitrePage(){
 		return $this->m_titrePage;

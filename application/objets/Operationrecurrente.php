@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Operationrecurrente extends SavableObject {
 	static private $key='operationRecurrenteId';
 	public function getPrimaryKey(){

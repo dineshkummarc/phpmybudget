@@ -1,15 +1,12 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Application\Services;
 
-/**
- * Description of AjaxFlux
- *
- * @author ingeni
- */
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Application\Objects\Flux;
+
 class AjaxFlux {
     //put your code here
     public function display(ContextExecution $p_contexte){

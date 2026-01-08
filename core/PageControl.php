@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Exception;
+
 class PageControl {
 
 	private $logger;
@@ -7,18 +11,17 @@ class PageControl {
 	private $gestionToken;
 	
 	public function __construct($gestionToken) {
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
 		
 		$this->gestionToken = $gestionToken;
 	}
 
 	public function process() {
-		
-		$contexte = new ContextExecution;
-		
 		$this->logger->debug('------------------------------------------------------');
 		$this->logger->debug('------------------------------------------------------');
 		$this->logger->debug('lancement');
+		$contexte = new ContextExecution;
+		
 		$l_domaine= null;
 		$l_service= null;
 		
@@ -78,8 +81,8 @@ class PageControl {
 				echo json_encode($contexte->m_dataResponse);
 				$this->logger->debug('Exception:'.$e->message);
 			} else {
-				echo $e->message;
-				if(is_array($e->tabException)){
+				echo $e->message; //TODO à revoir
+				/*if(is_array($e->tabException)){
 					echo '<table border="1">';
 					echo '<tr><td>ERROR</td></tr>';
 					foreach ($e->tabException as $value) {
@@ -94,8 +97,8 @@ class PageControl {
 						echo "<tr><td>$value</td></tr>";
 					}
 					echo '</table>';
-				}
-				$this->logger->debug('Exception:'.$e->message);
+				}*/
+				//$this->logger->debug('Exception:'.$e->message);
 			}
 		}
 	}

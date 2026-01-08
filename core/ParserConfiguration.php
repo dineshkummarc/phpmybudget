@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class ParserConfiguration {
 
     public static function getAction($p_domaine, $p_service) {

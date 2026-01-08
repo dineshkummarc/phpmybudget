@@ -1,5 +1,15 @@
 <?php
 
+namespace Core;
+
+
+use SimpleXMLElement;
+use DomDocument;
+use ReflectionObject;
+use ReflectionProperty;
+use XSLTProcessor;
+use stdClass;
+
 class PageDescription {
 
     private $m_nomClasse = '';
@@ -23,7 +33,7 @@ class PageDescription {
 	private $logger;
 	
     public function __construct($p_domaine, $p_service, $p_nomClasse, $p_methode, $p_privee) {
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
         $this->m_domaine = $p_domaine;
         $this->m_service = $p_service;
         $this->m_nomClasse = $p_nomClasse;
@@ -65,9 +75,10 @@ class PageDescription {
         $this->logger->debug('Service:' . $this->m_service);
         $this->logger->debug('Classe:' . $this->m_nomClasse);
         $this->logger->debug('Methode:' . $this->m_methode);
+        $this->logger->debug('Render:' . $this->m_render);
 
         try {
-            $service = new $this->m_nomClasse;
+            $service = new ('Application\\Services\\'.$this->m_nomClasse);
 			$methode = $this->m_methode.'';
 			$service->$methode($p_contexte);
         } catch (FunctionnalException $fe) {
@@ -75,6 +86,7 @@ class PageDescription {
             $p_contexte->addError($fe->getMessage());
         }
         //lance l'affichage si le rendu est xsl
+        $this->logger->debug('go render:'.$this->m_render);
         switch($this->m_render) {
             case 'jsonphp':
                 echo json_encode($p_contexte->m_dataResponse);
@@ -137,7 +149,7 @@ class PageDescription {
                 $this->addBlock($group, $dataRow->fetchPublicMembers());
             } else if (is_array($dataRow)) {
                 //$this->logger->debug('traite tableau');
-                $this->addBlockRow($p_noeud, $dataRow);
+                $this->addBlockRow($p_noeud, (array) $dataRow);
             } else if ($dataRow instanceof ReponseAjax) {
                 $tab = array();
                 $reflect = new ReflectionObject($dataRow);
@@ -168,7 +180,6 @@ class PageDescription {
             if ($object instanceof stdClass) {
                 $group = $noeudListe->addChild('Dynamic');
                 $group->addAttribute('index', $indice);
-                //$this->addBlock($group, $object->fetchPublicMembers());
                 $tab = array();
                 $reflect = new ReflectionObject($object);
                 foreach ($reflect->getProperties(ReflectionProperty::IS_PUBLIC) as $var) {
@@ -187,9 +198,9 @@ class PageDescription {
      * 
      * Enter description here ...
      * @param object $p_noeud
-     * @param array $p_dataRow
+     * @param $p_dataRow
      */
-    private function addBlockRow($p_noeud, $p_dataRow) {
+    private function addBlockRow( $p_noeud, $p_dataRow) {
         $group = $p_noeud->addChild($p_dataRow->m_name);
         $group->addAttribute('total', count($p_dataRow->getData()));
         //on parcourt les différents enregistrements
@@ -198,7 +209,7 @@ class PageDescription {
             $element->addAttribute('index', $key);
             //pour chaque champ
             foreach ($row as $l => $value) {
-                $element->addChild($l, utf8_encode($value));
+                $element->addChild($l, mb_convert_encoding($value, 'UTF-8'));
             }
         }
     }
@@ -223,16 +234,16 @@ class PageDescription {
     }
 
     /**
-     * Fonction de g�n�ration du flux xml
+     * Fonction de génération du flux xml
      * @param ContextExecution $p_contexte
      */
     public function parse(ContextExecution $p_contexte) {
         $this->logger->debug('xsl:' . $this->m_xsl);
 
-        //cr�ation flux xml
+        //création flux xml
         $doc = new SimpleXMLElement('<?xml version="1.0" encoding="ISO-8859-1"?><root></root>');
 
-        //traitement de la requ�te html
+        //traitement de la requête html
         $request = $doc->addChild('request');
         $this->addBlock($request, $p_contexte->m_dataRequest->getDataTab());
         

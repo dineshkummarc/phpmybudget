@@ -4,7 +4,7 @@
 		<domaine name="compte">
 			<service name="getone" classe="GestionCompteService" methode="getOne" isPrivee="true" render="json"/>
 			<service name="getpage" classe="GestionCompteService" methode="fictive" isPrivee="true"  xsl="xsl/comptes_liste.xsl"/>
-			<service name="getliste" classe="GestionCompteService" methode="gesListe" render="json" isPrivee="true"/>
+			<service name="getliste" classe="GestionCompteService" methode="getListe" render="json" isPrivee="true"/>
 			<service name="create" classe="GestionCompteService" methode="create" render="json" isPrivee="true"/>
 			<service name="update" classe="GestionCompteService" methode="update" render="json" isPrivee="true"/>
 			<service name="soldecompte" classe="GestionCompteService" methode="soldeCompte" render="json" isPrivee="true"/>

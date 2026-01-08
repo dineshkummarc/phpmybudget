@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Prevision extends SavableObject {
 	static private $key='ligneId';
 	public function getPrimaryKey(){

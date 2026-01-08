@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Periode extends SavableObject {
 	static private $key='periode';
 	public function getPrimaryKey(){

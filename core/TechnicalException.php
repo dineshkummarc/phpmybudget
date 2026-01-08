@@ -1,15 +1,9 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Core;
 
-/**
- * Description of TechnicalException
- *
- * @author ingeni
- */
+use Exception;
+
 class TechnicalException extends Exception{
     //put your code here
     public $message;

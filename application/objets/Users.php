@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Users extends SavableObject {
 	static private $key='userId';
 	public function getPrimaryKey(){

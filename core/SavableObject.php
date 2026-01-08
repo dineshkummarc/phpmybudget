@@ -1,9 +1,12 @@
 <?php
-/**
- * Description of SavableObject
- *
- * @author ingeni
- */
+
+namespace Core;
+
+use PDO;
+use PDOException;
+use ReflectionObject;
+use ReflectionProperty;
+
 abstract class SavableObject extends Objects {
 
 	private $logger;
@@ -13,10 +16,14 @@ abstract class SavableObject extends Objects {
 
 	private $champsDef;
 	
+    protected $datecre;
+    protected $utimod;
+    protected $datemod;
+
 	final public function __construct(){
 		parent::__construct();
 		$this->champsDef = $this->getChamps();
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
 	}
 	
     public function isLoaded() {
@@ -30,6 +37,8 @@ abstract class SavableObject extends Objects {
 		$table=array();
 		$pdo = ConnexionPDO::getInstance ();
 		$l_requete = 'SHOW COLUMNS FROM ' . strtolower($this->_tableName);
+        $this->logger = MyLogger::getInstance();
+        $this->logger->debug($l_requete);
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
 			$table[$l_champs ['Field']] = $l_champs;

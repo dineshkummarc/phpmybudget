@@ -1,12 +1,14 @@
 <?php
 
+namespace Core;
+
 class DataRequest {
 
     private $m_data = Array();
     private $logger;
     public function __construct() {
-        $this->logger = Logger::getRootLogger();
-        //$this->logger->debug("analyse data post");
+        $this->logger = MyLogger::getInstance();
+        $this->logger->debug("analyse data post");
         //print_r($_POST);
         foreach ($_POST as $key => $value) {
             $this->m_data[$key] = htmlspecialchars($value);
@@ -17,6 +19,7 @@ class DataRequest {
             $this->m_data[$key] = htmlspecialchars($value);
             //$logger->debug("cle get: $key : $value");
         }
+        $this->logger->debug("fin analyse data post");
     }
 
     public function getData($p_key) {

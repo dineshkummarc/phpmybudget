@@ -1,5 +1,9 @@
 <?php
 
+namespace Application\Scripts;
+
+use Core\ListDynamicObject;
+
 abstract class ComptesCommun {
 	
 	/**
@@ -13,7 +17,6 @@ abstract class ComptesCommun {
 		//$dyn->getData();
 		
 		return $dyn;
-		
 	}
 
 	/**
@@ -26,10 +29,7 @@ abstract class ComptesCommun {
 		$dyn->request($l_requete);
 		//$dyn->getData();
 		
-		return $dyn;
-		
+		return $dyn;	
 	}
-	
 }
-
 ?>

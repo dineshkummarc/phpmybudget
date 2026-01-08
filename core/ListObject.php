@@ -1,16 +1,17 @@
 <?php
-/**
- * Description of ListObject
- * Classe permettant de récupérer une liste d'objets persistents
- *
- * @author ingeni
- */
+
+namespace Core;
+
+use PDO;
+use PDOException;
+//use Application\Object\Users;
+
 class ListObject extends ListStructure implements IList{
     
 	
    	final public function __construct($name){
 		parent::__construct();
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
 		$this->ligneParPage = LIGNE_PAR_PAGE;
 		$this->name=$name;
 	}
@@ -31,17 +32,17 @@ class ListObject extends ListStructure implements IList{
         $this->nbLineTotal = $stmt->rowCount();
         $this->totalPage = 1;
         $this->page = 1;
-        $this->tabResult = $stmt->fetchAll(PDO::FETCH_CLASS, $classe);  
+        $this->tabResult = $stmt->fetchAll(PDO::FETCH_CLASS, 'Application\\Objects\\'.$classe);  
         
-        //appel des requetes des objets associés
+        //appel des requetes des objets associÃ©s
         $this->callAssoc();
     }
     
     /**
-     *fonction lançant une requete SQL
+     *fonction lanÃ§ant une requete SQL
      * @param string $classe nom de la classe
      * @param string $clause clause SQL de recherche
-     * @param int $page numéro de page
+     * @param int $page numÃ©ro de page
      */
     public function request($classe, $clause=null, $page=0){
         
@@ -82,7 +83,7 @@ class ListObject extends ListStructure implements IList{
         $this->totalPage = ceil($this->getNbLineTotal() / $this->ligneParPage);
         $this->page=$page;
 		
-        //appel des requetes des objets associés
+        //appel des requetes des objets associÃ©s
         $this->callAssoc();
     }
 

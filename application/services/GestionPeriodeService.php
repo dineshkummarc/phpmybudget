@@ -1,5 +1,14 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Core\ListObject;
+use Core\ReponseAjax;
+use Application\Scripts\PeriodeCommun;
+
 class GestionPeriodeService extends ServiceStub{
 	
 	public function getListe(ContextExecution $p_contexte) {

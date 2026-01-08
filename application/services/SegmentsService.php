@@ -1,16 +1,14 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Application\Services;
 
-/**
- * Description of SegmentsService
- *
- * @author ingeni
- */
-class SegmentsService {
+use Core\ConnexionPDO;
+use Core\ContextExecution;
+use Core\ListObject;
+use Core\ServiceStub;
+use Application\Objects\Segment;
+
+class SegmentsService extends ServiceStub {
     
     public function display(ContextExecution $p_contexte) {
         $cleseg=$p_contexte->m_dataRequest->getData('cleseg');

@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Application\\Objects\\": "application/objets",
+            "Application\\Services\\": "application/services",
+            "Application\\Scripts\\": "application/scripts",
+            "Core\\": "core"
+        }
+    },
+	"require": {
+        "monolog/monolog": "^3.9"
+    }
+}

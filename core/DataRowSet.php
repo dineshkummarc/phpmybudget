@@ -15,11 +15,11 @@ class DataRowSet{
 	private $logger;
 	
 	public function __construct(){
-		$this->logger = Logger::getRootLogger();	
+		$this->logger = MyLogger::getInstance();	
 	}
 	/**
 	 * 
-	 * ajout de données
+	 * ajout de donnï¿½es
 	 * @param classe_bdd $p_connexion
 	 * @param unknown_type $p_rows
 	 * @param unknown_type $p_name

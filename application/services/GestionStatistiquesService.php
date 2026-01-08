@@ -1,4 +1,9 @@
 <?php
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
 
 class GestionStatistiquesService extends ServiceStub {
 	

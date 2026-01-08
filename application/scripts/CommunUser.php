@@ -1,5 +1,12 @@
 <?php 
 
+namespace Application\Scripts;
+
+use Core\ContextExecution;
+use Core\ListObject;
+use Core\MyLogger;
+use Core\FunctionnalException;
+
 class CommunUser {
 	
 	public static function getParameters(ContextExecution $p_contexte){
@@ -15,7 +22,7 @@ class CommunUser {
 		$clause="nom='". $p_user ."' AND motDePasse='". $p_mdp . "'";
 		$list->request('Users', $clause);
 		
-		Logger::getRootLogger()->debug('nb login:' . $list->getNbLine());
+		MyLogger::getInstance()->debug('nb login:' . $list->getNbLine());
 		if($list->getNbLine()==1){
 			return $list->getData()[0];			
 		} else {

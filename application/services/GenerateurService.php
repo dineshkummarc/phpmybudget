@@ -1,15 +1,11 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Application\Services;
 
-/**
- * Description of GenrateurService
- *
- * @author ingeni
- */
+use Core\ContextExecution;
+use Core\GenerateurClasse;
+
+
 class GenerateurService {
     //put your code here
     

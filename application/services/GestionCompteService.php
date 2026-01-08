@@ -1,8 +1,16 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Application\Objects\Comptes;
+use Application\Scripts\ComptesCommun;
+
 class GestionCompteService extends ServiceStub {
 
-	public function gesListe(ContextExecution $p_contexte){
+	public function getListe(ContextExecution $p_contexte){
 		$userid = $p_contexte->getUser()->userId;
 		$listSolde = new ListDynamicObject('SommeOperation');
 		$listSolde->setAssociatedRequest(null, 'SELECT SUM(montant) AS somme, noCompte FROM operation where noCompte=\'$parent->numeroCompte\' and noncomptabilisee=0');

@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Comptes extends SavableObject {
 	static private $key='numeroCompte';
 	public function getPrimaryKey(){
@@ -9,14 +14,14 @@ class Comptes extends SavableObject {
 	public $libelle;
 	
 	public $solde;
-
-	public $ordreaffichage;
 	
 	public $userId;
 	
-	public $datecre;
-	
 	public $comptepro;
+	
+	public $ordreaffichage;
+	
+	public $datecre;
 	
 	public $datemod;
 	

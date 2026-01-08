@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Exception;
+
 class FunctionnalException extends Exception {
     
     protected $message;

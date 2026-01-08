@@ -1,15 +1,9 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Application\Scripts;
 
-/**
- * Description of PeriodeCommun
- *
- * @author ingeni
- */
+use Application\Objects\Periode;
+
 class PeriodeCommun {
     //put your code here
     

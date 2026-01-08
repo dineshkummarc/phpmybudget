@@ -1,5 +1,15 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Core\ReponseAjax;
+use Application\Objects\Comptes;
+use Application\Objects\Operation;
+use Application\Scripts\OperationCommun;
+
 class GestionOperationService extends ServiceStub{
 
 	public function getListe(ContextExecution $p_contexte){

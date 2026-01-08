@@ -1,9 +1,8 @@
 <?php
-/**
- * Description of PrevisionCommun
- *
- * @author ingeni
- */
+namespace Application\Scripts;
+
+use Application\Objects\Prevision;
+
 class PrevisionCommun {
     
     /**

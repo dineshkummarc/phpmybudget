@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 abstract class ServiceStub {
 
 	protected $logger=null;
@@ -7,18 +9,14 @@ abstract class ServiceStub {
 	public function fictive(ContextExecution $p_contexte){}
 	
 	final public function __construct(){
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
 	}
 	
 	protected function getLogger() {
 		if($this->logger==null) {
-			$this->logger = Logger::getRootLogger();
+			$this->logger = MyLogger::getInstance();
 		}
 		return $this->logger;
 	}
-	
 }
-
-
-
 ?>

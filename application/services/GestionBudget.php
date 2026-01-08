@@ -1,5 +1,12 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Application\Objects\Lignebudget;
+
 class GestionBudget extends ServiceStub{
 
     public function getPage(ContextExecution $p_contexte){

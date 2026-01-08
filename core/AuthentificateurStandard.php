@@ -1,11 +1,16 @@
 <?php
 
+namespace Core;
+
+use Exception;
+use Application\Objects\Users;
+
 class AuthentificateurStandard {
 
 	private $logger;
 	
 	public function __construct() {
-		$this->logger = Logger::getRootLogger();
+		$this->logger = MyLogger::getInstance();
 	}
 	
 	public function authenticate($p_contexte){

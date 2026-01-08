@@ -1,15 +1,7 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Core;
 
-/**
- * Description of ReponseAjax
- *
- * @author ingeni
- */
 class ReponseAjax {
     
 	//OK ou KO

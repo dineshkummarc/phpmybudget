@@ -1,23 +1,16 @@
 <?php
-//namespace core;
-// http://localhost/phpmybudget/index.php?domaine=prevision&service=getlisteannee2&edition=edition&periode=2021&numeroCompte=90063454011&flagPinel=complet
-// http://json.parser.online.fr/
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Core;
 
-/**
- * Description of Statement
- *
- * @author ingeni
- */
+use ReflectionObject;
+use ReflectionProperty;
+use stdClass;
+
 final class ParserJson 
 {
-    protected $logger=null;
+    private $logger;
 	
     public function __construct() {
- 		$this->logger = Logger::getRootLogger();
+ 		$this->logger = MyLogger::getInstance();
     }
 	
 	private function addBlock($p_data) {
@@ -44,7 +37,7 @@ final class ParserJson
      * @param array $p_tabDataRow
      */
     public function parseData($p_tabDataRow) {
-        $this->logger->debug('parse data');
+        $this->logger->debug('json parse data');
 		$json='"racine":{';
 		$tab=array();
         foreach ($p_tabDataRow as $dataRow) {
@@ -66,6 +59,7 @@ final class ParserJson
                 //$ligne = $p_noeud->addChild($key, $dataRow);
             }
         }
+        $this->logger->debug('json fin parse data');
 		return $json.implode(',', $tab).'}';
     }
 
@@ -93,7 +87,6 @@ final class ParserJson
                 $tab[]=$this->addBlock($object->fetchPublicMembers());
             }
         }
-		
 		return $chaine.implode(',',$tab).']}';
     }
 

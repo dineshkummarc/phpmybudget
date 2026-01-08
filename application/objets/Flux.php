@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Flux extends SavableObject {
 	static private $key='fluxId';
 	public function getPrimaryKey(){

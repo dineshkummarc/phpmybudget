@@ -1,5 +1,15 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ConnexionPDO;
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Core\ListObject;
+use Core\ReponseAjax;
+use Application\Objects\Prevision;
+
 class GestionPrevisionEnteteService extends ServiceStub {
 	
 	public function create(ContextExecution $p_contexte){
@@ -18,10 +28,6 @@ class GestionPrevisionEnteteService extends ServiceStub {
         $entete->nomEntete = $nomEntete;
         $entete->fluxId = $fluxId;
         $entete->create();
-        //$idEntete = $entete->lastInsertId();
-        
-        //$this->logger->debug('nouvelle entete:' . $idEntete);
-        
         
         $init=1;
         $intervalle=1;
@@ -154,5 +160,4 @@ class GestionPrevisionEnteteService extends ServiceStub {
 		
 	}
 }
-
 ?>

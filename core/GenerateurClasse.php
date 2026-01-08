@@ -1,20 +1,12 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Core;
 
-/**
- * Description of GenerateurClasse
- *
- * @author ingeni
- */
+use PDO;
+use Core\ConnexionPDO;
+
 class GenerateurClasse {
 	
-	//put your code here
-	
-
 	private $tabPrimary = null;
 	private $tabChamps = null;
 	
@@ -23,7 +15,7 @@ class GenerateurClasse {
 	 * @param type $p_connexion 
 	 */
 	public function generer() {
-		//r�cup�ration de la liste des tables
+		//récupération de la liste des tables
 		$l_requete = 'SHOW full tables WHERE Table_Type = \'BASE TABLE\'';
 		$pdo = ConnexionPDO::getInstance ();
 		$l_result = $pdo->query ( $l_requete );
@@ -48,10 +40,8 @@ class GenerateurClasse {
 		$l_result = $pdo->query ( $l_requete );
 		while ( $l_champs = $l_result->fetch ( PDO::FETCH_ASSOC ) ) {
 			//recherche des champs de la table
-			
-
 			if ($l_champs ['Key'] == 'PRI')
-				$this->tabPrimary [$l_champs ['Field']] = $l_champs ['Field']; //$l_champs;
+				$this->tabPrimary [$l_champs ['Field']] = $l_champs ['Field'];
 			else
 				$this->tabChamps [$l_champs ['Field']] = $l_champs;
 		}
@@ -63,7 +53,7 @@ class GenerateurClasse {
 	 * @param type $p_nomTable 
 	 */
 	private function genererClasseStub($p_nomTable) {
-		$l_code = "<?php\nclass $p_nomTable" . " extends SavableObject {\n";
+		$l_code = "<?php\n\nnamespace Application\Objects;\n\nuse Core\SavableObject;\n\nclass $p_nomTable" . " extends SavableObject {\n";
 		print_r ( $this->tabPrimary );
 		$l_code .= "\tstatic private \$key='" . implode ( ',', $this->tabPrimary ) . "';\n";
 		$l_code .= "\tpublic function getPrimaryKey(){\n\t\treturn self::\$key;\n\t}\n";
@@ -84,5 +74,4 @@ class GenerateurClasse {
 		fclose ( $l_file );
 	}
 }
-
 ?>

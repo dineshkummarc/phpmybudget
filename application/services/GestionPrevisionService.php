@@ -1,4 +1,15 @@
-﻿<?php
+<?php
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Core\ListObject;
+
+use Application\Objects\Comptes;
+use Application\Objects\Prevision;
+use Application\Scripts\ComptesCommun;
+
 
 class GestionPrevisionService extends ServiceStub {
 	public function getPage(ContextExecution $p_contexte) {
@@ -82,8 +93,9 @@ class GestionPrevisionService extends ServiceStub {
 		return $listeFlux;
 	}
 
-
-
+	/**
+	 * 
+	 */
 	private function getRequeteFlux($depense, $clausePinel, $annee,$numeroCompte) {
 		return "SELECT DISTINCT flux.fluxId, flux, depense, noCompte
 		FROM prevision 
@@ -113,22 +125,13 @@ class GestionPrevisionService extends ServiceStub {
 				$clausePinel='AND EXISTS (SELECT 1 FROM flux WHERE 1=1 AND flux.fluxid=prevision.fluxid AND flux.fluxMaitreId !=\'101\')';
 				break;
 		}
-		
-		
+				
         $clausePrevisions = "noCompte='$numeroCompte' and typenr='L' and annee='$annee' $clausePinel";
         
         $previsions = new ListObject('Previsions');
         $previsions->request('Prevision', $clausePrevisions);
 		$p_contexte->addDataBlockRow($previsions);
 		
-        //requête des opérations récurrentes
-        /*$requeteTotaux = 
-			"SELECT ROUND(sum(montant),2) AS total
-			FROM operation 
-				LEFT JOIN flux ON flux.fluxId = operation.fluxId $clausePinel
-				LEFT JOIN prevision ON (prevision.fluxId = operation.fluxId AND prevision.noCOmpte='$numeroCompte' AND operation.dateOperation LIKE concat( prevision.periode,'%')
-			WHERE operation.nocompte='$numeroCompte' and operationRecurrente='checked' AND dateOperation like concat('$annee','%') ";
-		*/
         $requete=
 			"SELECT ROUND(SUM( montant),2) AS total , fluxId, substring(operation.dateOperation,1,7) as mois
 			FROM operation 
@@ -142,8 +145,6 @@ class GestionPrevisionService extends ServiceStub {
 		
 		//liste des périodes
         $liste = new ListObject('Periodes');
-        //$liste->setAssociatedKey($previsions);
-        //$liste->setAssociatedKey($listMontantTotaux);
         $liste->request('Periode', "periode between '$dateDeb' and '$dateFin' order by periode");
         
         $p_contexte->addDataBlockRow($liste);
@@ -222,7 +223,6 @@ class GestionPrevisionService extends ServiceStub {
 		$tab=array();
 		$tab['previsionReste']=number_format($soldePre - $sommeOpe, 2,'.', '');
 		$tab['estimationReste']=number_format($solde, 2,'.', '');
-		//$tab[1]=number_format($solde, 2,'.', '');
 		
         $p_contexte->addDataBlockRow($tab);
 	}

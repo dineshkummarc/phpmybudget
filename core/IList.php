@@ -1,13 +1,7 @@
 <?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author ingeni
- */
+namespace Core;
+
 interface IList {
     //put your code here
     

@@ -1,5 +1,13 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListObject;
+use Core\ReponseAjax;
+use Application\Objects\Segment;
+
 class GestionSegmentService extends ServiceStub {
 	
 	public function getSegment(ContextExecution $p_contexte) {

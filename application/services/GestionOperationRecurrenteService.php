@@ -1,5 +1,12 @@
 <?php 
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Application\Objects\Operationrecurrente;
+
 class GestionOperationRecurrenteService extends ServiceStub{
 	
 	/**
@@ -23,15 +30,9 @@ class GestionOperationRecurrenteService extends ServiceStub{
         }
 
         $requete=
-			'SELECT operationrecurrente.nocompte, 
-				operationrecurrente.operationrecurrenteId, 
-				operationrecurrente.libelle, 
-				operationrecurrente.fluxId, 
-				operationrecurrente.modePaiementId,
-				flux.flux,
-				format(operationrecurrente.montant,2) as montant 
+			"SELECT operationrecurrente.nocompte, operationrecurrente.operationrecurrenteId, operationrecurrente.libelle, operationrecurrente.fluxId, operationrecurrente.modePaiementId, flux.flux, format(operationrecurrente.montant,2) as montant 
 			FROM operationrecurrente LEFT JOIN flux ON operationrecurrente.fluxid = flux.fluxid 
-			WHERE ' . " operationrecurrente.nocompte='$numeroCompte'";
+			WHERE operationrecurrente.nocompte='$numeroCompte'";
         
 		if($operationrecurrenteId!=null){
 			$requete.=" AND operationrecurrenteId=$operationrecurrenteId";
@@ -83,5 +84,4 @@ class GestionOperationRecurrenteService extends ServiceStub{
     }
 	
 }
-
 ?>

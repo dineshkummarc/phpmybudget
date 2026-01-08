@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Operation extends SavableObject {
 	static private $key='operationId';
 	public function getPrimaryKey(){
@@ -24,11 +29,11 @@ class Operation extends SavableObject {
 	
 	public $verif;
 	
+	public $noncomptabilisee;
+	
 	public $operationIdOri;
 	
 	public $numeroCompteOri;
-
-	public $noncomptabilisee;
 	
 	public $datecre;
 	

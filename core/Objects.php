@@ -1,9 +1,10 @@
 <?php
-/**
- * Description of Objects
- *
- * @author ingeni
- */
+
+namespace Core;
+
+use ReflectionObject;
+use ReflectionProperty;
+
 abstract class Objects
 {
     static protected $_pdo=null;
@@ -13,8 +14,7 @@ abstract class Objects
         return $this->_tableName;
     }
     
-	//protected static $_pk;
-
+	
     private $_props = array();
     
     
@@ -24,12 +24,12 @@ abstract class Objects
 	 */
     public function __construct(){
         if(self::$_pdo==null){
-            //$arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-            //self::$_pdo = new JPDO('mysql:host=localhost;dbname=appli_migration','root','',$arrExtraParam);
             self::$_pdo = ConnexionPDO::getInstance();
         }
         $reflect = new ReflectionObject($this);
-        $this->_tableName = $reflect->getName();
+        //on extrait le nom de la classe du namespace de la classe
+        preg_match('/[^\\\\]+$/', $reflect->getName(), $matches);
+        $this->_tableName = str_replace('Application\\Objects\\', '', $matches[0]);
         
     }
     

@@ -1,11 +1,13 @@
 <?php
 
-/**
- * Description of OperationCommun
- *
- * @author ingeni
- *
- */
+namespace Application\Scripts;
+
+use Core\ListObject;
+use Core\MyLogger;
+use Application\Objects\Flux;
+use Application\Objects\Operation;
+
+
 class OperationCommun {
 
 	/**
@@ -14,7 +16,7 @@ class OperationCommun {
 	 * @param Operation $p_operation
 	 */
 	public static function rechercherOperationLiee($flux, $p_operation){
-		$logger = Logger::getRootLogger();
+		$logger = MyLogger::getInstance();
 		
 		$listOpe = new ListObject('ListeOperations');
         //recherche d'une opération ayant les références de l'opération en cours
@@ -32,7 +34,7 @@ class OperationCommun {
      * Gestion d'une opération liée pour les flux multi comptes
      */
     public static function operationLiee($p_operation){
-        $logger = Logger::getRootLogger();
+        $logger = MyLogger::getInstance();
 		
 		//recherche de la conf du flux
         $l_flux = new Flux();

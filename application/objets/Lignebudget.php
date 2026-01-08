@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Lignebudget extends SavableObject {
 	static private $key='lignebudgetid';
 	public function getPrimaryKey(){

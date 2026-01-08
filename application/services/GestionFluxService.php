@@ -1,5 +1,12 @@
 <?php
 
+namespace Application\Services;
+
+use Core\ServiceStub;
+use Core\ContextExecution;
+use Core\ListDynamicObject;
+use Application\Objects\Flux;
+
 class GestionFluxService extends ServiceStub {
 	
 	/**
@@ -20,7 +27,6 @@ class GestionFluxService extends ServiceStub {
                 
 		$numeroPage=$p_contexte->m_dataRequest->getData('numeroPage');
 		
-		//$listFlux = new ListObject('ListeFlux');
 		$listFlux = new ListDynamicObject('ListeFlux');
 		$requete="SELECT fluxId, flux, description, compteId, compteDest FROM flux WHERE ";
 		$requete.="userId='$userid'";
@@ -36,8 +42,6 @@ class GestionFluxService extends ServiceStub {
 		if($fluxMaitre!=''){
 			$requete.= " AND fluxMaitre='$fluxMaitre' ";
 		}
-		/*$this->logger->debug('flux maitre id:'.$fluxMaitreId);
-		$this->logger->debug('flux maitre exclu:'.$fluxMaitreExclu);*/
 		
 		if($fluxMaitreId!=''){
 			$requete.= " AND fluxMaitreId='$fluxMaitreId' ";
@@ -46,7 +50,6 @@ class GestionFluxService extends ServiceStub {
 			$requete.= " AND fluxMaitreId!='$fluxMaitreExclu' ";
 		}
 		
-		//$listFlux->request('Flux', $requete.' order by flux', $numeroPage);
 		$listFlux->request( $requete.' order by flux', $numeroPage);
 		$p_contexte->addDataBlockRow($listFlux);
 	

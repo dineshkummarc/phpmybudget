@@ -1,4 +1,9 @@
 <?php
+
+namespace Application\Objects;
+
+use Core\SavableObject;
+
 class Segment extends SavableObject {
 	static private $key='cleseg,codseg';
 	public function getPrimaryKey(){
